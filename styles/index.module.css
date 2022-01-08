@@ -12,6 +12,16 @@
   align-items: center;
 }
 
+.crop-container{
+  position: relative;
+  width: 800px;
+  height: 600px;
+}
+
+.control{
+
+}
+
 .footer {
   display: flex;
   flex: 1;
