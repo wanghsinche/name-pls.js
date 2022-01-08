@@ -8,13 +8,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tensorflow/tfjs-node": "^3.12.0",
+    "@vladmandic/face-api": "^1.6.3",
     "axios": "^0.24.0",
+    "canvas": "^2.8.0",
+    "copy-webpack-plugin": "^10.2.0",
     "multer": "^1.4.4",
     "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-easy-crop": "^4.0.1",
     "react-query": "^3.34.7"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "devDependencies": {
     "@types/multer": "^1.4.7",

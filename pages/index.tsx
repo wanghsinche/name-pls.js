@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/index.module.css'
+import styles from '@/styles/index.module.css'
 import Cropper from 'react-easy-crop'
 import React, { useState, useCallback, useMemo, useRef } from 'react'
 import { Area } from 'react-easy-crop/types'
-import { createImage, getOutput } from '../utils/image'
+import { createImage, getOutput } from '@/utils/image'
 import axios from 'axios';
 import { QueryClient, QueryClientProvider, useMutation } from 'react-query'
 import { IData } from './api/recog'
@@ -64,16 +64,17 @@ const Home: NextPage = () => {
         </h1>
 
         <div className="app">
-          <div style={{ position: 'relative', width: 360, height: 360, }} className="container mx-auto" >
+          <div style={{ position: 'relative', width: 336, height: 336, }} className="container mx-auto" >
             <Cropper
               image={blobURL}
               crop={crop}
               zoom={zoom}
+              zoomSpeed={0.1}
               aspect={1}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}
-              cropSize={{ width: 300, height: 300 }}
+              cropSize={{ width: 224, height: 224 }}
             />
           </div>
           <div className="container mx-auto py-8 text-center	">

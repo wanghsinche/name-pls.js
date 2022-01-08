@@ -37,11 +37,11 @@ export const getOutput = async (imgURL: string, cropInfo: Area) => {
     )
 
     // set canvas width to final desired crop size - this will clear existing context
-    canvas.width = pixelCrop.width
-    canvas.height = pixelCrop.height
+    canvas.width =  pixelCrop.width * 1.2
+    canvas.height = pixelCrop.height * 1.2
 
     // paste generated image at the top left corner
-    ctx.putImageData(data, 0, 0)
+    ctx.putImageData(data, (canvas.width - pixelCrop.width)/2, (canvas.height - pixelCrop.height)/2)
 
     // As a blob
     return new Promise<Blob>((resolve) => {
