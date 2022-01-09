@@ -35,7 +35,7 @@ export default async function handler(
 
     let out = path.resolve(process.cwd(), './face.jpg');
     if (face) {
-        saveBlob(out, face);
+        out = face.length + ''
     }
     else {
         out = 'no face'

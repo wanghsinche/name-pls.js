@@ -23,15 +23,17 @@ faceapi.env.monkeyPatch({
 import { faceDetectionNet, faceDetectionOptions, faceLandmarksNet, faceLandmarksTinyNet } from './common/facedetection';
 import { postprecessBox, rotateCanvas, theBestFaceWithLandmarks } from './common/utils';
 
+const modelURL = path.resolve(__dirname, 'model');//'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.6.3/model/';
+
 export async function init() {
     if (!faceDetectionNet.isLoaded) {
-        await faceDetectionNet.loadFromDisk(path.resolve(__dirname, 'model'))
+        await faceDetectionNet.load(modelURL);
     }
     if (!faceLandmarksTinyNet.isLoaded) {
-        await faceLandmarksTinyNet.loadFromDisk(path.resolve(__dirname, 'model'))
+        await faceLandmarksTinyNet.load(modelURL);
     }
     if (!faceLandmarksNet.isLoaded) {
-        await faceLandmarksNet.loadFromDisk(path.resolve(__dirname, 'model'))
+        await faceLandmarksNet.load(modelURL);
     }
 
 }
