@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/index.module.css'
 import Cropper from 'react-easy-crop'
-import React, { useState, useCallback, useMemo, useRef } from 'react'
+import React, { useState, useCallback, useMemo, useRef, createRef } from 'react'
 import { Area } from 'react-easy-crop/types'
 import { createImage, getOutput } from '@/utils/image'
 import axios from 'axios';
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [blob, setBlob] = useState<Blob>()
-
+  const inputRef = createRef<HTMLInputElement>();
   const outputRef = useRef<Area>();
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -93,8 +93,11 @@ const Home: NextPage = () => {
             
           </div>
 
-          <div className=" container mx-auto ">
-          <input type="file" className="block mx-auto" onChange={e => { console.log(e.target.value, e.target.files); setBlob(e.target.files ? e.target.files[0] : void 0); }} onClick={(e) => (e.target as any).value = ''} />
+          <div className=" container mx-auto flex max-w-lg">
+          <input type="file" ref={inputRef} className="hidden" onChange={e => { console.log(e.target.value, e.target.files); setBlob(e.target.files ? e.target.files[0] : void 0); }} onClick={(e) => (e.target as any).value = ''} />
+
+          <button onClick={()=>inputRef.current?.click()} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">upload</button>
+
 
           <button onClick={onConfirm} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Confirm</button>
 
