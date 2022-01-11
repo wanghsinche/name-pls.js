@@ -101,9 +101,9 @@ const Home: NextPage = () => {
 
           </div>
 
-          <section>
+          <section className="mx-auto container w-52">
           {
-            mutation.data &&  'result: '+mutation.data.name
+            mutation.data &&  `result: ${mutation.data.name}  maybe ${mutation.data.possible.join(' or ')}` 
           }
           {
             mutation.isLoading && 'loading...'

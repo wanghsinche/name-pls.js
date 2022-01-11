@@ -1,5 +1,6 @@
 import { Canvas, Image } from 'canvas';
 import { Tensor } from 'onnxruntime-node';
+const clasess:string[] = require('./classes.json');
 
 export function createImage(src:string|Buffer){
     const img = new Image();
@@ -94,4 +95,8 @@ export function normalizeVector(input: Array<number>|Float32Array){
         });    
         return input.map(el=>el/l2Norm);
     }
+}
+
+export function topK(ls:Array<number>, k:number){
+    return ls.map((el,idx)=>({label:clasess[idx], value:el})).sort((a,b)=>b.value-a.value).slice(0, k)
 }
