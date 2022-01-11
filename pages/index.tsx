@@ -64,7 +64,7 @@ const Home: NextPage = () => {
         </h1>
 
         <div className="app">
-          <div style={{ position: 'relative', width: 336, height: 336, }} className="container mx-auto" >
+          <div style={{ position: 'relative', width: 336, height: 336, }} className="container mx-auto border  rounded" >
             <Cropper
               image={blobURL}
               crop={crop}
@@ -76,6 +76,7 @@ const Home: NextPage = () => {
               onZoomChange={setZoom}
               cropSize={{ width: 224, height: 224 }}
             />
+            {!blobURL && <div className="absolute left-1/4	top-1/2">please upload an image</div>}
           </div>
           <div className="container mx-auto py-8 text-center	">
             <input
@@ -96,7 +97,7 @@ const Home: NextPage = () => {
           <div className=" container mx-auto flex max-w-lg">
           <input type="file" ref={inputRef} className="hidden" onChange={e => { console.log(e.target.value, e.target.files); setBlob(e.target.files ? e.target.files[0] : void 0); }} onClick={(e) => (e.target as any).value = ''} />
 
-          <button onClick={()=>inputRef.current?.click()} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">upload</button>
+          <button onClick={()=>inputRef.current?.click()} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Upload</button>
 
 
           <button onClick={onConfirm} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Confirm</button>
