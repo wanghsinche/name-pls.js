@@ -5,6 +5,7 @@ import { promisify } from 'util';
 import { getFaceFromBlob } from '@/services/faceapi';
 import { saveBlob } from '@/utils/saveblob';
 import * as path from 'path';
+import { getSession, preprocess } from '@/services/recog';
 
 const upload = multer({ storage: multer.memoryStorage() })
 
@@ -33,13 +34,19 @@ export default async function handler(
 
     const face = await getFaceFromBlob(data.buffer, 1, [224,224]);
 
+
+
     let out = path.resolve(process.cwd(), './face.jpg');
     if (face) {
-        out = face.length + ''
+        const i = await preprocess(face)
+        saveBlob(path.resolve(process.cwd(),'face.jpg'), i);
+        out = face.length + '' 
     }
     else {
         out = 'no face'
     }
+
+
 
     return res.status(200).json({ name: out })
 }
