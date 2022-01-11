@@ -5,6 +5,7 @@ import { promisify } from 'util';
 import { getFaceFromBlob } from '@/services/faceapi';
 import { saveBlob } from '@/utils/saveblob';
 import * as path from 'path';
+import { getFeat, createImage, predict, topK } from '@/services/recog';
 
 const upload = multer({ storage: multer.memoryStorage() })
 
@@ -18,7 +19,8 @@ interface IMulterFile {
   }
 
 export type IData = {
-    name: string
+    name: string;
+    possible: string[];
 }
 
 export default async function handler(
@@ -33,15 +35,27 @@ export default async function handler(
 
     const face = await getFaceFromBlob(data.buffer, 1, [224,224]);
 
+
     let out = path.resolve(process.cwd(), './face.jpg');
+
+    let possible:string[] = [];
+
     if (face) {
-        out = face.length + ''
+        const faceimg = await createImage(face);
+        const feat = await getFeat(faceimg);
+        const result = await predict(feat as Float32Array);
+        const best = result['label'].data[0];
+        const top = topK(Array.from(result['probabilities'].data as any) , 3);
+        possible = top.map(el=>el.label);
+        out = best as string;
     }
     else {
         out = 'no face'
     }
 
-    return res.status(200).json({ name: out })
+
+
+    return res.status(200).json({ name: out, possible:possible.slice(1) })
 }
 
 export const config = {

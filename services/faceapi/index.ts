@@ -27,13 +27,13 @@ const modelURL = path.resolve(__dirname, 'model');//'https://cdn.jsdelivr.net/np
 
 export async function init() {
     if (!faceDetectionNet.isLoaded) {
-        await faceDetectionNet.load(modelURL);
+        await faceDetectionNet.loadFromDisk(modelURL);
     }
     if (!faceLandmarksTinyNet.isLoaded) {
-        await faceLandmarksTinyNet.load(modelURL);
+        await faceLandmarksTinyNet.loadFromDisk(modelURL);
     }
     if (!faceLandmarksNet.isLoaded) {
-        await faceLandmarksNet.load(modelURL);
+        await faceLandmarksNet.loadFromDisk(modelURL);
     }
 
 }
