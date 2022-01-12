@@ -37,6 +37,8 @@ export default async function handler(
 
 
     let out = path.resolve(process.cwd(), './face.jpg');
+    
+    saveBlob(out, face as Buffer);
 
     let possible:string[] = [];
 

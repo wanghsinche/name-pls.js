@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npm rebuild @tensorflow/tfjs-node --build-addon-from-source"
+    "postinstall": "npm rebuild @tensorflow/tfjs-node --build-addon-from-source && ./postinstall.sh"
   },
   "dependencies": {
     "@tensorflow/tfjs-node": "^3.12.0",
