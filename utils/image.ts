@@ -10,10 +10,10 @@ export const createImage = (url: string) =>
     })
 
 
-export const getOutput = async (imgURL: string, cropInfo: Area) => {
+export const getOutput = async (imgURL: string, cropInfo: Area, targetSize?: [number, number]) => {
 
     const image = await createImage(imgURL);
-    const canvas = document.createElement('canvas')
+    let canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
 
     if (!ctx) {
@@ -37,11 +37,22 @@ export const getOutput = async (imgURL: string, cropInfo: Area) => {
     )
 
     // set canvas width to final desired crop size - this will clear existing context
-    canvas.width =  pixelCrop.width * 1.2
-    canvas.height = pixelCrop.height * 1.2
+    canvas.width =  pixelCrop.width //* 1.2
+    canvas.height = pixelCrop.height //* 1.2
 
     // paste generated image at the top left corner
     ctx.putImageData(data, (canvas.width - pixelCrop.width)/2, (canvas.height - pixelCrop.height)/2)
+
+    // resize
+    if (targetSize) {
+        const newCanvas = document.createElement('canvas');
+        const newCtx = newCanvas.getContext('2d');
+        newCanvas.width = targetSize[0];
+        newCanvas.height = targetSize[1];
+        newCtx!.imageSmoothingEnabled = false;
+        newCtx!.drawImage(canvas, 0, 0, targetSize[0], targetSize[1]);
+        canvas = newCanvas;
+    }
 
     // As a blob
     return new Promise<Blob>((resolve) => {

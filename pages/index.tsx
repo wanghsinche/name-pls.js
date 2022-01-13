@@ -1,29 +1,29 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '@/styles/index.module.css'
 import Cropper from 'react-easy-crop'
 import React, { useState, useCallback, useMemo, useRef, createRef } from 'react'
 import { Area } from 'react-easy-crop/types'
-import { createImage, getOutput } from '@/utils/image'
+import { getOutput } from '@/utils/image'
 import axios from 'axios';
 import { QueryClient, QueryClientProvider, useMutation } from 'react-query'
 import { IData } from './api/recog'
-
+import { loginByGithub } from '@/services/submitface';
+import { SubmitPage } from '@/components/submit'
 const api = '/api/recog';
 
 
 const Home: NextPage = () => {
 
-  const mutation = useMutation<IData, unknown, Blob>(api, (file:Blob)=>{
+  const mutation = useMutation<IData, unknown, Blob>(api, (file: Blob) => {
     const form = new FormData();
     form.append('file', file);
-    return axios.post(api, form).then(res=>res.data)
-  })  
+    return axios.post(api, form).then(res => res.data)
+  })
 
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [blob, setBlob] = useState<Blob>()
+  const [outputBlob, setOutputBlob] = useState<Blob>();
   const inputRef = createRef<HTMLInputElement>();
   const outputRef = useRef<Area>();
 
@@ -37,17 +37,19 @@ const Home: NextPage = () => {
     if (!blobURL || !outputRef.current) {
       return;
     }
-    const b = await getOutput(blobURL, outputRef.current);
+    const b = await getOutput(blobURL, outputRef.current, [224, 224]);
     console.log(b, b && URL.createObjectURL(b));
-    
 
-    if (!b){
-      return 
+
+    if (!b) {
+      return
     }
-
+    setOutputBlob(b);
     mutation.mutate(b);
 
   }, [blobURL]);
+
+  const submitDom = useMemo(() => outputBlob && <SubmitPage img={outputBlob} />, [outputBlob])
 
   return (
     <div >
@@ -91,32 +93,37 @@ const Home: NextPage = () => {
               }}
               className="zoom-range max-w-lg	w-52 "
             />
-            
+
           </div>
 
           <div className=" container mx-auto flex max-w-lg">
-          <input type="file" ref={inputRef} className="hidden" onChange={e => { console.log(e.target.value, e.target.files); setBlob(e.target.files ? e.target.files[0] : void 0); }} onClick={(e) => (e.target as any).value = ''} />
+            <input type="file" ref={inputRef} className="hidden" onChange={e => { console.log(e.target.value, e.target.files); setBlob(e.target.files ? e.target.files[0] : void 0); }} onClick={(e) => (e.target as any).value = ''} />
 
-          <button onClick={()=>inputRef.current?.click()} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Upload</button>
+            <button onClick={() => inputRef.current?.click()} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Upload</button>
 
 
-          <button onClick={onConfirm} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Confirm</button>
+            <button onClick={onConfirm} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Confirm</button>
 
 
           </div>
+          <div className="text-right  mx-1 ">
+            {submitDom}
 
-          <section className="mx-auto container w-52">
-          {
-            mutation.data &&  `result: ${mutation.data.name}  maybe ${mutation.data.possible.join(' or ')}` 
-          }
-          {
-            mutation.isLoading && 'loading...'
-          }
-          {
-            mutation.isError && String(mutation.error)
-          }
+          </div>
+
+          <section className="mx-auto max-w-lg	 mb-10 mt-5">
+            {
+              mutation.data && <div>
+                <p>result: {mutation.data.name}</p> <p>maybe {mutation.data.possible.join(' or ')}</p>
+              </div>
+            }
+            {
+              mutation.isLoading && 'loading...'
+            }
+            {
+              mutation.isError && String(mutation.error)
+            }
           </section>
-
 
         </div>
 

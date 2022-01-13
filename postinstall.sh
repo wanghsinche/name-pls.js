@@ -8,4 +8,4 @@ echo 'download'
 curl -L https://github.com/wanghsinche/action-practise/releases/download/model.onnx-20220106-011404/bernoullinb_R100_Glint360K_XSList-full.onnx -o services/recog/bernoullinb_R100_Glint360K_XSList-full.onnx
 fi
 
-ls services/recog/
+ls services/recog/*.onnx
