@@ -24,10 +24,11 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
+RUN yarn install
 
-RUN npm build
+
+RUN yarn run build
 
 EXPOSE 3000
 
-CMD ["npm","start"]
+CMD ["yarn","start"]
