@@ -1,5 +1,6 @@
 # Install dependencies only when needed
 FROM node:16-buster AS deps
+RUN apt install libpixman-1-dev libcairo2-dev libpango1.0-dev libjpeg8-dev libgif-dev
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
