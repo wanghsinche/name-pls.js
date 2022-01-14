@@ -30,11 +30,12 @@ jobs:
     - run: npm install
     - run: npm run build
     - name: Build the Docker image
-      run: docker build . --tag ${{ env.image_url }}:$(date +%s)
+      run: docker build . --tag ${{ env.image_url }}:${{ env.GITHUB_SHA }}
+#       $(date +%s)
     
         
     - name: Publish
       run: |
-        docker push ${{ env.image_url }}
+        docker push ${{ env.image_url }}:${{ env.GITHUB_SHA }}
 
     
