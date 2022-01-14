@@ -2,7 +2,7 @@
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  pageExtensions: ['onnx', 'jsx', 'js', 'tsx', 'ts'],
+  pageExtensions: ['onnx', 'jsx', 'js', 'tsx', 'ts', 'json', 'bin'],
   reactStrictMode: true,
   //distDir: 'build',
   webpack: (config, {  }) => {
