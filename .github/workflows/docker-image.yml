@@ -1,0 +1,37 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: 'A username passed from the caller workflow'
+        default: 'john-doe'
+        required: false
+        type: string
+        
+env:
+  image_url: wanghsinche/name-pls
+  docker_username: wanghsince
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+    - run: npm build
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    
+    - name: Login Registry
+      run: |
+        docker login --username=${{ env.docker_username }} --password=${{ secrets.docker_password }}
+        
+    - name: Publish
+      run: |
+        docker push ${{ env.image_url }}:${{ GITHUB_SHA }}
+
+    
