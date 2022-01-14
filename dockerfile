@@ -7,6 +7,7 @@ RUN apk add --update --no-cache \
     curl \
     python3 \
     g++ \
+    libstdc++ \
     jpeg-dev \
     cairo-dev \
     giflib-dev \
