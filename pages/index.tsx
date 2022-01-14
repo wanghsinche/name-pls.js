@@ -10,6 +10,9 @@ import { IData } from './api/recog'
 import { loginByGithub } from '@/services/submitface';
 import { SubmitPage } from '@/components/submit'
 import Image from 'next/image'
+import { Footer } from '@/components/footer'
+import { Nav } from '@/components/nav'
+import { info } from '@/components/info'
 
 const api = '/api/recog';
 
@@ -63,15 +66,15 @@ const Home: NextPage = () => {
         <script src="https://cdn.tailwindcss.com/3.0.11"></script>
       </Head>
 
+      <Nav />
+      
       <main >
-        <h1 >
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        
 
-        <div className="app flex flex-col items-center w-full h-full pt-10 bg-base-200">
+        <div className="flex flex-col items-center w-full h-full pt-10 bg-base-200">
 
-          <div className="avatar">
-            <div style={{ position: 'relative', width: 336, height: 336, }} className="container mx-auto border  rounded" >
+          <div className="app">
+            <div style={{ position: 'relative', width: 336, height: 336, }} className="mask mask-squircle" >
               <Cropper
                 image={blobURL}
                 crop={crop}
@@ -83,13 +86,13 @@ const Home: NextPage = () => {
                 onZoomChange={setZoom}
                 cropSize={{ width: 224, height: 224 }}
               />
-              {!blobURL && <div className="absolute h-full w-full top-0 left-0 opacity-60 flex flex-col items-center justify-center" style={{ backgroundColor: '#ccc' }} onClick={()=>inputRef.current?.click()}>
+              {!blobURL && <div className="absolute h-full w-full top-0 left-0 bg-base-300	 flex flex-col items-center justify-center" style={{ backgroundColor: '#ccc' }} onClick={()=>inputRef.current?.click()}>
                 <Image height={80} width={80} src="/face-id-svgrepo-com.svg"/>
-                <div>please select an image</div>
+                <p className="my-4">please select an image</p>
               </div>}
             </div>
           </div>
-          <div className="container mx-auto py-8 text-center	">
+          <div className="container mx-auto py-4 text-center	">
             <input
               type="range"
               value={zoom}
@@ -105,40 +108,47 @@ const Home: NextPage = () => {
 
           </div>
 
-          <div className=" container mx-auto flex max-w-lg">
-            <input type="file" ref={inputRef} className="hidden" onChange={e => { console.log(e.target.value, e.target.files); setBlob(e.target.files ? e.target.files[0] : void 0); }} onClick={(e) => (e.target as any).value = ''} />
-
-            <button onClick={() => inputRef.current?.click()} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Upload</button>
-
-
-            <button onClick={onConfirm} className="mx-auto w-52 h-10 block border rounded	border-slate-500	my-8">Confirm</button>
-
-
-          </div>
-          <div className="text-right  mx-1 ">
-            {submitDom}
-
-          </div>
-
-          <section className="mx-auto max-w-lg	 mb-10 mt-5">
+          <section >
             {
-              mutation.data && <div>
-                <p>result: {mutation.data.name}</p> <p>maybe {mutation.data.possible.join(' or ')}</p>
+              mutation.data && <div className="mb-4 text-2xl font-bold text-pink-500	">
+                {mutation.data.name} 
               </div>
             }
             {
-              mutation.isLoading && 'loading...'
+              mutation.data && <p className="text-sm">maybe {mutation.data.possible.join(' or ')}</p>
+            }
+
+            {
+              mutation.isLoading &&<button className="text-sky-500 btn btn-sm btn-ghost loading">loading...</button>
             }
             {
-              mutation.isError && String(mutation.error)
+              mutation.isError && <p className="text-rose-600	text-sm">{String(mutation.error)}</p>
             }
           </section>
+
+
+
+          <div className=" container mx-auto flex justify-center">
+            <input type="file" ref={inputRef} className="hidden" onChange={e => { console.log(e.target.value, e.target.files); setBlob(e.target.files ? e.target.files[0] : void 0); }} onClick={(e) => (e.target as any).value = ''} />
+
+            <button onClick={() => inputRef.current?.click()} className="btn btn-outline w-36 mx-2 my-8 ">Select</button>
+
+
+            <button onClick={onConfirm} className="btn btn-outline btn-primary w-36 mx-2 my-8 ">Confirm</button>
+
+
+          </div>
+          <div className="text-right  mx-1 mb-8">
+            {submitDom}
+          </div>
+
 
         </div>
 
 
       </main>
 
+      <Footer />
     </div>
   )
 }

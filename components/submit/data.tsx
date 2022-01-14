@@ -1,14 +1,15 @@
 import { Octokit } from '@octokit/rest';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import axios, { AxiosResponse } from 'axios';
+import { loginByGithub } from '@/services/submitface';
 enum API {
     login = '/github/login',
     actresslist = '/api/actresslist',
     comments = '/github/comment'
 }
 export const useData=()=>{
-    const token = global.sessionStorage?.getItem('token');
+    const [token, setToken] = useState(global.sessionStorage?.getItem('token') as string);
     const oct = useRef<Octokit>();
     useEffect(()=>{
         oct.current = new Octokit({auth:token});
@@ -36,9 +37,22 @@ export const useData=()=>{
         });
     })  
     
+    const login = useCallback(async () => {
+        window.open(loginByGithub());
+        const tk = await new Promise(res => {
+            const ii = (msg: MessageEvent) => {
+                console.log(msg);
+                window.removeEventListener("message", ii);
+                res(msg.data);
+            };
+            window.addEventListener("message", ii);
+        });
+        sessionStorage.setItem('token', tk as string);
+        setToken(tk as string);
+    }, [])
 
 
     return {
-        userData, actresslistData, mutation
+        userData, actresslistData, mutation, login
     }
 }
