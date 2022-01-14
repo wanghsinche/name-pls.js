@@ -4,6 +4,7 @@ WORKDIR /app
 
 RUN apk add --update --no-cache \
     make \
+    curl \
     python3 \
     g++ \
     jpeg-dev \
