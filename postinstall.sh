@@ -1,11 +1,11 @@
-if [ ! -f services/recog/r100-glint300k.onnx ]; then
+if [ ! -f services/recog/model/r100-glint300k.onnx ]; then
 echo 'download'
-curl -L https://github.com/wanghsinche/action-practise/releases/download/model.onnx-20220106-011404/r100-glint300k.onnx -o services/recog/r100-glint300k.onnx
+curl -L https://github.com/wanghsinche/action-practise/releases/download/model.onnx-20220106-011404/r100-glint300k.onnx -o services/recog/model/r100-glint300k.onnx
 fi
 
-if [ ! -f services/recog/bernoullinb_R100_Glint360K_XSList-full.onnx ]; then
+if [ ! -f services/recog/model/bernoullinb_R100_Glint360K_XSList-full.onnx ]; then
 echo 'download'
-curl -L https://github.com/wanghsinche/action-practise/releases/download/model.onnx-20220106-011404/bernoullinb_R100_Glint360K_XSList-full.onnx -o services/recog/bernoullinb_R100_Glint360K_XSList-full.onnx
+curl -L https://github.com/wanghsinche/action-practise/releases/download/model.onnx-20220106-011404/bernoullinb_R100_Glint360K_XSList-full.onnx -o services/recog/model/bernoullinb_R100_Glint360K_XSList-full.onnx
 fi
 
-ls services/recog/*.onnx
+ls services/recog/*.onnx -R

@@ -36,10 +36,8 @@ export default async function handler(
     const face = await getFaceFromBlob(data.buffer, 1, [224,224]);
 
 
-    let out = path.resolve(process.cwd(), './face.jpg');
+    let out = '';
     
-    saveBlob(out, face as Buffer);
-
     let possible:string[] = [];
 
     if (face) {

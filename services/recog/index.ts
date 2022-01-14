@@ -8,7 +8,7 @@ export * from './misc';
 
 let featSession:ort.InferenceSession;
 
-const featModelPath = path.resolve(__dirname,'./r100-glint300k.onnx');
+const featModelPath = path.resolve(__dirname,'./model/r100-glint300k.onnx');
 
 async function getFeatSession(){
     if (!featSession) {
@@ -19,7 +19,7 @@ async function getFeatSession(){
     return featSession;
 }
 
-const bayesianModelPath = path.resolve(__dirname,'./bernoullinb_R100_Glint360K_XSList-full.onnx');
+const bayesianModelPath = path.resolve(__dirname,'./model/bernoullinb_R100_Glint360K_XSList-full.onnx');
 
 let bayesianSession: ort.InferenceSession;
 

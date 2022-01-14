@@ -2,7 +2,7 @@
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  pageExtensions: ['onnx', 'jsx', 'js', 'tsx', 'ts', 'json', 'bin'],
+  pageExtensions: ['jsx', 'js', 'tsx', 'ts'],
   reactStrictMode: true,
   //distDir: 'build',
   webpack: (config, {  }) => {
@@ -10,16 +10,20 @@ module.exports = {
     config.resolve.extensions.push(".ts", ".tsx");
     config.resolve.fallback = { fs: false };
 
-    // config.plugins.push(
-    // new CopyPlugin({
-    //   patterns: [
-    //       {
-    //         from: './services/faceapi/model',
-    //         to: 'server/pages/api/model',
-    //       },
-    //     ],
-    //   }),
-    // );
+    config.plugins.push(
+    new CopyPlugin({
+      patterns: [
+          {
+            from: './services/faceapi/model',
+            to: 'server/pages/api/model',
+          },
+          {
+            from: './services/recog/model',
+            to: 'server/pages/api/model',
+          },
+        ],
+      }),
+    );
 
     return config;
   } 

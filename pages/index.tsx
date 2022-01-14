@@ -115,7 +115,7 @@ const Home: NextPage = () => {
               </div>
             }
             {
-              mutation.data && <p className="text-sm">maybe {mutation.data.possible.join(' or ')}</p>
+              mutation.data && mutation.data.possible.length && <p className="text-sm">maybe {mutation.data.possible.join(' or ')}</p>
             }
 
             {
