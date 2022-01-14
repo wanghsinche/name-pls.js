@@ -15,7 +15,7 @@ export const SearchSelect: React.FC<IProps> = (p) => {
     const [show, setShow] = useState(false);
     const realV: string = v || p.value as string;
 
-    const showOpt = useMemo(() => word ? p.options.filter(el => (el.value + el.label).toLowerCase().includes(word)).slice(0, 10) : [], [word])
+    const showOpt = useMemo(() => word ? p.options.filter(el => (el.value + el.label).toLowerCase().includes(word)).slice(0, 10) : p.options.slice(0,10), [word])
 
     const cOnChange = useCallback((v: string) => {
         if (p.onChange) {
