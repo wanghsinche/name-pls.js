@@ -35,6 +35,6 @@ jobs:
         
     - name: Publish
       run: |
-        docker push ${{ env.image_url }}:${GITHUB_SHA}
+        docker push ${{ env.image_url }}
 
     
