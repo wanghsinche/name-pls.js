@@ -2,13 +2,13 @@ import * as ort from 'onnxruntime-node';
 import { Image } from 'canvas';
 import * as misc from './misc';
 import { InferenceSession, OnnxValue } from 'onnxruntime-node';
-
+import * as path from 'path';
 export * from './misc';
 
 
 let featSession:ort.InferenceSession;
 
-const featModelPath = '/mnt/c/Documents and Settings/wangh/Downloads/r100-glint300k.onnx';
+const featModelPath = path.resolve(__dirname,'./r100-glint300k.onnx');
 
 async function getFeatSession(){
     if (!featSession) {
@@ -19,7 +19,7 @@ async function getFeatSession(){
     return featSession;
 }
 
-const bayesianModelPath = '/home/wanghsinche/machinelearn/name-pls/services/recog/bernoullinb_R100_Glint360K_XSList-full.onnx'
+const bayesianModelPath = path.resolve(__dirname,'./bernoullinb_R100_Glint360K_XSList-full.onnx');
 
 let bayesianSession: ort.InferenceSession;
 
