@@ -10,6 +10,7 @@ RUN apk add --update --no-cache \
     libstdc++ \
     jpeg-dev \
     cairo-dev \
+    libc6-compat \
     giflib-dev \
     pango-dev \
     libtool \
