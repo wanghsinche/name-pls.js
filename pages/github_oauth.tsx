@@ -8,7 +8,7 @@ const Oauth:NextPage<{token:string}>=(p)=>{
       window.opener?.postMessage(p.token, '*');
       console.log(window.opener, p.token);
       window.close();
-    }, [])
+    }, [p.token])
 
     return <div>
       redirect ...
