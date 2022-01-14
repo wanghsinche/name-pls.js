@@ -25,9 +25,9 @@ jobs:
 
 
     - run: npm install
-    - run: npm build
+    - run: npm run build
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ env.image_url }}:$(date +%s)
+      run: docker build . --tag ${{ env.image_url }}:$(date +%s)
     
     - name: Login Registry
       run: |
