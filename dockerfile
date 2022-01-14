@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apk add --update --no-cache \
     make \
-    python \
+    python3 \
     g++ \
     jpeg-dev \
     cairo-dev \
