@@ -1,15 +1,26 @@
-FROM ubuntu:20.04
-
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - && \
-apt-get install -y nodejs
+FROM node:16-alpine
 
 WORKDIR /app
 
-COPY . .
+RUN apk add --update --no-cache \
+    make \
+    python \
+    g++ \
+    jpeg-dev \
+    cairo-dev \
+    giflib-dev \
+    pango-dev \
+    libtool \
+    autoconf \
+    automake
+
+COPY package.json ./
 
 RUN npm install
 
-RUN npm build
+COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
 
