@@ -11,7 +11,7 @@ on:
         
 env:
   image_url: wanghsinche/name-pls
-  docker_username: wanghsince
+  docker_username: wanghsinche
 
 jobs:
 
@@ -23,15 +23,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Login Registry
+      run: |
+        docker login --username=${{ env.docker_username }} --password=${{ secrets.DOCKER_PASSWORD }}
 
     - run: npm install
     - run: npm run build
     - name: Build the Docker image
       run: docker build . --tag ${{ env.image_url }}:$(date +%s)
     
-    - name: Login Registry
-      run: |
-        docker login --username=${{ env.docker_username }} --password=${{ secrets.DOCKER_PASSWORD }}
         
     - name: Publish
       run: |
