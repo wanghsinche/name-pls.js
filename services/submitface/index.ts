@@ -11,7 +11,7 @@ export function loginByGithub() {
     const url = new URL('https://github.com/login/oauth/authorize')
     url.searchParams.set('client_id', info.clientId);
     url.searchParams.set('scope','public_repo');
-    url.searchParams.set('redirect_uri', encodeURI('http://localhost:3000/github_oauth'))
+    url.searchParams.set('redirect_uri', encodeURI(location.origin+'/github_oauth'))
     return url.href;
 }
 
