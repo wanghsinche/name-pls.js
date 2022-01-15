@@ -8,7 +8,8 @@ export const Header = ()=>{
     <meta name="keywords" content="Name Please, Face Recognition, Search Star By Image, Deep Learning, AI, JAV, who is the girl in this image"></meta>
     <link rel="icon" href="/favicon.ico" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@1.22.2/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com/3.0.11"></script>
+    {/* <script src="https://cdn.tailwindcss.com/3.0.11"></script> */}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
   </Head>
 
 }
