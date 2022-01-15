@@ -2,8 +2,11 @@ import { Octokit } from '@octokit/rest';
 import { createOAuthAppAuth } from '@octokit/auth-oauth-app';
 
 const info = {
-    clientId: "95353c42e0068b5dbbbf",
-    clientSecret: "f7ce87de2b6d7941c407cb6d9a51765559c7e5f2",
+    clientId: "Iv1.7500a00d02d745c7",
+    clientSecret: "a10536e16c1a9a0d1d6cf5c110a12e8a13ea1409",
+
+    // clientId: "95353c42e0068b5dbbbf",
+    // clientSecret: "f7ce87de2b6d7941c407cb6d9a51765559c7e5f2",
   }
 
 

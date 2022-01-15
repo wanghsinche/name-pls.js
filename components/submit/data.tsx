@@ -30,8 +30,8 @@ export const useData=()=>{
             reader.readAsDataURL(d.img);
         })
         return oct.current!.issues.createComment({
-            owner: 'wanghsinche',
-            repo: 'action-practise',
+            owner: 'FourF-src',
+            repo: 'name-pls',
             issue_number: 1,
             body: `${d.label}\n[img](${encoded})`
         });
