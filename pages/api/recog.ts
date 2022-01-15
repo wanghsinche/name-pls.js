@@ -6,6 +6,7 @@ import { getFaceFromBlob } from '@/services/faceapi';
 import { saveBlob } from '@/utils/saveblob';
 import * as path from 'path';
 import { getFeat, createImage, predict, topK } from '@/services/recog';
+import { record } from '@/services/recog/list';
 
 const upload = multer({ storage: multer.memoryStorage() })
 
@@ -44,7 +45,8 @@ export default async function handler(
         const faceimg = await createImage(face);
         const feat = await getFeat(faceimg);
         const result = await predict(feat as Float32Array);
-        const best = result['label'].data[0];
+        let best = result['label'].data[0];
+        best = record[best as string] || best;
         const top = topK(Array.from(result['probabilities'].data as any) , 3);
         possible = top.map(el=>el.label);
         out = best as string;

@@ -32,7 +32,7 @@ export const SearchSelect: React.FC<IProps> = (p) => {
         inputRef.current?.focus();
     }, [show])
 
-    return <div className="form-control w-1/2" style={{ position: 'relative' }}>
+    return <div className="form-control max-w-full	w-60" style={{ position: 'relative' }}>
         <div className="fixed left-0 top-0 w-full h-full z-0" style={{ display: show ? 'block' : 'none' }} onClick={() => { setShow(false); }}></div>
         <input className="input input-bordered w-full" style={{ display: !show ? 'block' : 'none' }} onClick={() => { setShow(true); }} value={realV} placeholder="actress name"></input>
         <div className="z-10 dropdown w-full" style={{ display: show ? 'block' : 'none' }} >
