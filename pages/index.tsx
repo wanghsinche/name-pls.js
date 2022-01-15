@@ -42,6 +42,18 @@ const Home: NextPage = () => {
 
   const blobURL = useMemo(() => blob && URL.createObjectURL(blob), [blob]);
 
+  const onClickUpload = useCallback(async ()=>{
+    if (!blobURL || !outputRef.current) {
+      return;
+    }
+    const b = await getOutput(blobURL, outputRef.current, [336, 336]);
+    if (!b) {
+      return
+    }
+    setOutputBlob(b);
+    
+  }, []);
+
   const onConfirm = useCallback(async () => {
     if (!blobURL || !outputRef.current) {
       return;
