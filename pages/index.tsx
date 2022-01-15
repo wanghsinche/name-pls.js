@@ -11,6 +11,7 @@ import Image from 'next/image'
 import { Footer } from '@/components/footer'
 import { Nav } from '@/components/nav'
 import { Header } from '@/components/header'
+import { Sponsor } from '@/components/sponsor'
 
 const mixpanel = require('mixpanel-browser');
 
@@ -80,8 +81,8 @@ const Home: NextPage = () => {
       <main >
         
 
-        <div className="flex flex-col items-center w-full h-full pt-10 bg-base-200">
-
+        <div className="flex flex-col items-center w-full h-full pt-2 bg-base-200">
+          <p className="my-4">Ensure the face is filled to the detect area</p>
           <div className="app">
             <div style={{ position: 'relative', width: 336, height: 336, }} className="mask mask-squircle" >
               <Cropper
@@ -97,7 +98,7 @@ const Home: NextPage = () => {
               />
               {!blobURL && <div className="absolute h-full w-full top-0 left-0 bg-base-300	 flex flex-col items-center justify-center" style={{ backgroundColor: '#ccc' }} onClick={()=>inputRef.current?.click()}>
                 <Image height={80} width={80} src="/face-id-svgrepo-com.svg"/>
-                <p className="my-4">please select an image</p>
+                <p className="my-4">Please select an image</p>
               </div>}
             </div>
           </div>
@@ -106,7 +107,7 @@ const Home: NextPage = () => {
               type="range"
               value={zoom}
               min={1}
-              max={3}
+              max={5}
               step={0.1}
               aria-labelledby="Zoom"
               onChange={(e) => {
@@ -117,7 +118,7 @@ const Home: NextPage = () => {
 
           </div>
 
-          <section >
+          <section className="mx-4">
             {
               mutation.data && <div className="mb-4 text-2xl font-bold text-pink-500	">
                 {mutation.data.name} 
@@ -150,13 +151,8 @@ const Home: NextPage = () => {
           <div className="text-right  mx-1 mb-8">
             {submitDom}
           </div>
-
-
         </div>
-
-
       </main>
-
       <Footer />
     </div>
   )

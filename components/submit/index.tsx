@@ -83,7 +83,7 @@ export const SubmitPage: React.FC<{ img?: Blob; className?: string }> = (p) => {
     </Transition>;
     return <>
         <a className={"cursor-pointer " + p.className} onClick={() => setShow(true)}>
-            recognize failed? <span className="underline">submit a new face</span>
+            recognize failed? <span className="link link-primary">submit a new face</span>
         </a>
         {createPortal(dom, document.body)}
     </>;
