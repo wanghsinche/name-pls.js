@@ -1,23 +1,27 @@
 import type { NextPage } from 'next'
 import Cropper from 'react-easy-crop'
-import React, { useState, useCallback, useMemo, useRef, createRef } from 'react'
+import React, { useState, useCallback, useMemo, useRef, createRef, useEffect } from 'react'
 import { Area } from 'react-easy-crop/types'
 import { getOutput } from '@/utils/image'
 import axios from 'axios';
 import { QueryClient, QueryClientProvider, useMutation } from 'react-query'
 import { IData } from './api/recog'
-import { loginByGithub } from '@/services/submitface';
 import { SubmitPage } from '@/components/submit'
 import Image from 'next/image'
 import { Footer } from '@/components/footer'
 import { Nav } from '@/components/nav'
-import { info } from '@/components/info'
 import { Header } from '@/components/header'
+
+const mixpanel = require('mixpanel-browser');
+
 
 const api = '/api/recog';
 
 
 const Home: NextPage = () => {
+  useEffect(()=>{
+    mixpanel.init("4139891504da7f844cac76469a07abe6");
+  }, [])
 
   const mutation = useMutation<IData, unknown, Blob>(api, (file: Blob) => {
     const form = new FormData();
