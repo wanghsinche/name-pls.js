@@ -36,4 +36,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 face.jpg
-*.onnx
+*glint300k.onnx
