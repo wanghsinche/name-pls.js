@@ -13,7 +13,7 @@ on:
         type: string
         
 env:
-  image_url: wanghsinche/name-pls
+  image_url: wanghsinche/face-recog
   docker_username: wanghsinche
 
 jobs:
