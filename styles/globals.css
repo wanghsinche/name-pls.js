@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.app .reactEasyCrop_Image,.app .reactEasyCrop_Video{
+  will-change: unset;
+}

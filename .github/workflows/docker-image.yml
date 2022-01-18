@@ -1,0 +1,34 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+        
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Login Registry
+      run: |
+        docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
+
+#     - run: npm install
+#     - run: npm run build
+    - name: Build the Docker image
+      run: docker build . --tag ${{ secrets.IMAGE_URL }}:${GITHUB_SHA}
+#       $(date +%s)
+    
+        
+    - name: Publish
+      run: |
+        docker push ${{ secrets.IMAGE_URL }}:${GITHUB_SHA}
+
+    
