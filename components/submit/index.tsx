@@ -1,4 +1,4 @@
-import { auth, loginByGithub } from '@/services/submitface';
+import { auth, loginByGithub } from '@/services/github';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SearchSelect } from '../searchselect';
@@ -68,7 +68,7 @@ export const SubmitPage: React.FC<{ img?: Blob; className?: string }> = (p) => {
         </div>
         <div className="flex justify-center my-8">
             {!userData && <button onClick={login} className="btn btn-active">Login with github</button>} 
-            {userData && <button className={'btn btn-secondary '+(mutation.isLoading?'loading':'')} onClick={submit}>submit</button>}
+            {userData && <button className={'btn btn-primary '+(mutation.isLoading?'loading':'')} onClick={submit}>submit</button>}
         </div>
     </div>;
 

@@ -1,6 +1,6 @@
-const actress:{id:string;cast:string;alias:string;}[] = require('@/services/recog/xslist-cast');
+const actress:{label:string;value:string;}[] = require('@/services/recog/label');
 
-export const list = actress.map(el=>({label:el.alias.replace(/\/Age \d+/,''), value:`${el.id}/${el.cast.replaceAll(' ','_')}`}));
+export const list = actress
 
 export const record = list.reduce((am, cu)=>{
     am[cu.value] = cu.label; 

@@ -1,24 +1,24 @@
 import React from 'react';
 import Image from 'next/image';
 export const Sponsor = () => {
-    return <>
-    <a href="#my-modal" >💰 Sponor AI </a> 
-      <div id="my-modal" className="modal">
+  return <>
+    <a href="#about-modal" >🔔 About </a>
+    <div id="about-modal" className="modal">
       <div className="modal-box">
         <div className="flex justify-around">
-        <Image src="/Ethereum_QR.png" height={140} width={140}/>
-        <Image src="/Tether_QR.png" height={140} width={140}/>
+          <Image src="/android-chrome-512x512.png" height={140} width={140} title="icon" />
         </div>
-        <p className="text-neutral my-8">Due to the costly AI computation fee, you donate is pretty important to this project. Much appreciated to sponsor with USDT or ETH. ❤️ </p> 
-        <p className="text-neutral my-8">Top Sponsors: 
-          <kbd className="kbd text-ellipsis overflow-hidden w-32 my-2 mx-2">0xa053c0c9f32ccbb0b871b22d1c1050e89e87ab7b</kbd> 
-          <kbd className="kbd text-ellipsis overflow-hidden w-32 my-2 mx-2">0x088876687ac7c4c60cbc0690a4bfae0971964162</kbd> 
-          <kbd className="kbd text-ellipsis overflow-hidden w-32 my-2 mx-2">0x59728544b08ab483533076417fbbb2fd0b17ce3a</kbd> 
-        </p> 
+        <h2 className="text-neutral text-center my-4">
+          name-pls.js 
+        </h2>
+        <p className="text-neutral my-4">
+          A Face Recognize Solution written in NodeJS. Using SOTA model optimized with eastern asian face. Running on microsoft's ONNX Runntime.</p>
+        <p className="text-neutral my-8">
+          Star it on <a href="https://github.com/wanghsinche/name-pls.js" target="_blank" className="link">GITHUB</a>  ❤️ </p>
         <div className="modal-action">
-          <a href="#" className="btn">Close</a> 
+          <a href="#" className="btn">Close</a>
         </div>
       </div>
     </div>
-    </>
+  </>
 }

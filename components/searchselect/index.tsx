@@ -38,7 +38,7 @@ export const SearchSelect: React.FC<IProps> = (p) => {
         <div className="z-10 dropdown w-full" style={{ display: show ? 'block' : 'none' }} >
             <input ref={inputRef} value={word} onChange={e => setWord(e.target.value.toLowerCase())} type="text" placeholder="actress name" className="input input-bordered w-full" />
             <ul tabIndex={0} className="shadow bg-base-100 menu dropdown-content w-full mt-2">
-                {showOpt.length === 0 && <li><a>No Data</a></li>}
+                {showOpt.length === 0 && word && <li><a>No Data</a></li>}
                 {showOpt.map(el => <li key={el.value}><a onClick={() => { cOnChange(el.value); }}>{el.label}</a></li>)}
             </ul>
         </div>

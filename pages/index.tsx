@@ -74,7 +74,7 @@ const Home: NextPage = () => {
   const submitDom = useMemo(() => outputBlob && <SubmitPage img={outputBlob} />, [outputBlob])
 
   return (
-    <div >
+    <div  data-theme="light">
       <Header/>
       <Nav />
       

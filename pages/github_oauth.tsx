@@ -1,4 +1,4 @@
-import { auth } from "@/services/submitface";
+import { auth } from "@/services/github";
 import { NextPage, GetServerSidePropsContext } from "next";
 import { useEffect } from "react";
 
@@ -6,7 +6,6 @@ const Oauth:NextPage<{token:string}>=(p)=>{
     
     useEffect(()=>{
       window.opener?.postMessage(p.token, '*');
-      console.log(window.opener, p.token);
       window.close();
     }, [p.token])
 

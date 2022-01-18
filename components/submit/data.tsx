@@ -2,7 +2,7 @@ import { Octokit } from '@octokit/rest';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import axios, { AxiosResponse } from 'axios';
-import { loginByGithub } from '@/services/submitface';
+import { loginByGithub } from '@/services/github';
 enum API {
     login = '/github/login',
     actresslist = '/api/actresslist',
@@ -30,8 +30,8 @@ export const useData=()=>{
             reader.readAsDataURL(d.img);
         })
         return oct.current!.issues.createComment({
-            owner: 'FourF-src',
-            repo: 'name-pls',
+            owner: 'wanghsinche',
+            repo: 'action-practise',
             issue_number: 1,
             body: `${d.label}\n[img](${encoded})`
         });

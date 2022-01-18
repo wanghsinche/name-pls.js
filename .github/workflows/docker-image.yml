@@ -5,17 +5,7 @@ on:
     branches:
       - main
   workflow_dispatch:
-    inputs:
-      username:
-        description: 'A username passed from the caller workflow'
-        default: 'john-doe'
-        required: false
-        type: string
         
-env:
-  image_url: wanghsinche/face-recog
-  docker_username: wanghsinche
-
 jobs:
 
   build:
@@ -28,17 +18,17 @@ jobs:
 
     - name: Login Registry
       run: |
-        docker login --username=${{ env.docker_username }} --password=${{ secrets.DOCKER_PASSWORD }}
+        docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
 
 #     - run: npm install
 #     - run: npm run build
     - name: Build the Docker image
-      run: docker build . --tag ${{ env.image_url }}:${GITHUB_SHA}
+      run: docker build . --tag ${{ secrets.IMAGE_URL }}:${GITHUB_SHA}
 #       $(date +%s)
     
         
     - name: Publish
       run: |
-        docker push ${{ env.image_url }}:${GITHUB_SHA}
+        docker push ${{ secrets.IMAGE_URL }}:${GITHUB_SHA}
 
     
