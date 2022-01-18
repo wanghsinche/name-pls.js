@@ -44,4 +44,4 @@ The bayesian classifier was trained with Japanese actress face. To add more actr
 
 - Face detect and align module relies on `faceapi.js`, which is built on Tensorflow.js and causes high memory usage. It'd be better to replace this module with onnx runtime module.
 - The Node Canvas module has external c++ libray dependecies, which is unfriendly to deploy them on cloud platform such as vercel or aws lambda. Replacing it with Jimp to process image would be more compatible.
-- The feature extraction pre-trained model is still low precision.  
+- The feature extraction pre-trained model is still low precision (about 70%).  
