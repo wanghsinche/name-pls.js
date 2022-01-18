@@ -3,7 +3,7 @@
 
 A ONNX Runtime backed Face-Recognition implementation for Node.js. You can easily replace the pre-train ONNX format file with your [SOTA](https://github.com/onnx/models) model to inter other **IMAGE** machine learning problems, include but not limited to **face** _verification_, _recognition_ and **object** _detection_.
 
-<img src="https://raw.githubusercontent.com/wanghsinche/name-pls.js/main/public/android-chrome-512x512.png?token=GHSAT0AAAAAABQVYF453ZQLJHOCYPD74Y2MYPGJOEA" height="100" title="Name-PLS.JS" alt="Name-PLS.JS" />
+<img src="https://raw.githubusercontent.com/wanghsinche/name-pls.js/main/public/android-chrome-512x512.png" height="100" title="Name-PLS.JS" alt="Name-PLS.JS" />
 
 An online demo can be found at [name-pls.com](https://name-pls.com)
 
